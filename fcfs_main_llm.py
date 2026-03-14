@@ -9,7 +9,7 @@ from collections import deque
 # USE YOUR ASSIGNED MIG GPU
 # -----------------------------
 os.environ["CUDA_VISIBLE_DEVICES"] = "MIG-51c93f85-6919-5785-8f23-031ab153a183"
-
+os.environ["OLLAMA_HOST"] = "http://127.0.0.1:11435"
 
 @dataclass
 class Task:
@@ -30,7 +30,12 @@ def run_llm(prompt, task: Task):
     first = True
     first_token_time = None
 
-    for chunk in ollama.generate(model=task.model, prompt=prompt, stream=True):
+    for chunk in ollama.generate(
+        model=task.model,
+        prompt=prompt,
+        stream=True,
+        options={"num_ctx": 2048}
+):
 
         if first:
             first_token_time = time.time()
@@ -71,7 +76,7 @@ def main():
         "gemma:2b"
     ]
 
-     prompts = [
+    prompts = [
   "Hi",
   "Hello",
   "Hey",
