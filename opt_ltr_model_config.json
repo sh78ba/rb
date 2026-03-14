@@ -1,0 +1,11 @@
+{
+  "batch_size": 8,
+  "epochs": 5,
+  "learning_rate": 2e-05,
+  "beta1": 0.9,
+  "beta2": 0.999,
+  "max_length": 256,
+  "use_listMLE": true,
+  "use_pairwise": true,
+  "max_samples": 2000
+}
